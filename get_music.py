@@ -1,31 +1,22 @@
-import requests, random, os
+import requests, random
 
-API_KEY = os.getenv("PIXABAY_API_KEY")
-QUERY = "ambient"
+# Example list of public domain tracks
+TRACKS = [
+    "https://freepd.com/music/Local%20Forecast%20-%20Elevator.mp3",
+    "https://freepd.com/music/Local%20Forecast%20-%20Slower.mp3",
+    "https://freepd.com/music/Local%20Forecast%20-%20Stings.mp3",
+    "https://freepd.com/music/Monkeys%20Spinning%20Monkeys.mp3",
+    "https://freepd.com/music/Scheming%20Weasel.mp3",
+    "https://freepd.com/music/Sneaky%20Snitch.mp3"
+]
 
-if not API_KEY:
-    raise Exception("❌ PIXABAY_API_KEY not found. Did you set the GitHub secret?")
+track_url = random.choice(TRACKS)
+music_file = "background.mp3"
 
-url = f"https://pixabay.com/api/music/?key={API_KEY}&q={QUERY}&per_page=50"
-resp = requests.get(url)
+print(f"🎵 Downloading music from: {track_url}")
+r = requests.get(track_url)
 
-print("🔎 Debug: Pixabay response status =", resp.status_code)
-print("🔎 Debug: Pixabay response text =", resp.text[:200])  # print first 200 chars
+with open(music_file, "wb") as f:
+    f.write(r.content)
 
-try:
-    data = resp.json()
-except Exception as e:
-    raise Exception(f"❌ Could not decode JSON. Response was: {resp.text}") from e
-
-if "hits" in data and data["hits"]:
-    track = random.choice(data["hits"])
-    music_url = track["audio"]
-    music_file = "background.mp3"
-    r = requests.get(music_url)
-
-    with open(music_file, "wb") as f:
-        f.write(r.content)
-
-    print(f"✅ Downloaded music: {track['name']}")
-else:
-    raise Exception("❌ No music found in Pixabay API response")
+print(f"✅ Music saved as {music_file}")
