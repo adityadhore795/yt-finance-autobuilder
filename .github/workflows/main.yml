@@ -28,3 +28,9 @@ jobs:
 
       - name: Make video with FFmpeg
         run: python make_video.py
+
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: youtube-video
+          path: output.mp4
