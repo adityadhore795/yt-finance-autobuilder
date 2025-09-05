@@ -28,3 +28,10 @@ subprocess.run([
 ])
 
 print(f"Video created: {output}")
+
+import os
+
+if os.path.exists("output.mp4"):
+    print("✅ Video successfully created: output.mp4")
+else:
+    print("❌ No output.mp4 found. Check ffmpeg logs above.")
