@@ -1,0 +1,29 @@
+name: Build YouTube Video
+
+on:
+  workflow_dispatch:   # manual trigger for now
+  push:                # runs when you push changes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Get music from Pixabay
+        run: python get_music.py
+        env:
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+
+      - name: Make video with FFmpeg
+        run: python make_video.py
