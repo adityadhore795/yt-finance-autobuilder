@@ -1,8 +1,8 @@
 name: Build YouTube Video
 
 on:
-  workflow_dispatch:   # manual trigger for now
-  push:                # runs when you push changes
+  workflow_dispatch:
+  push:
 
 jobs:
   build:
@@ -20,10 +20,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Get music from Pixabay
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Get music from FreePD
         run: python get_music.py
-        env:
-          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
 
       - name: Make video with FFmpeg
         run: python make_video.py
