@@ -25,7 +25,10 @@ jobs:
 
       - name: Get music from FreePD
         run: python get_music.py
-        
+      
+      - name: Generate script
+        run: python make_script.py  
+      
       - name: Generate voice from script
         run: python make_voice.py
 
