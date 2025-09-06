@@ -34,6 +34,9 @@ jobs:
 
       - name: Download stock video
         run: python get_stock.py
+
+      - name: Download background music
+        run: python get_background.py
         
       - name: Make video with FFmpeg
         run: python make_video.py
