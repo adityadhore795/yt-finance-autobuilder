@@ -1,2 +1,4 @@
+gTTS
+requests
 requests
 ffmpeg-python
