@@ -1,7 +1,7 @@
 import requests
 
-# Example free CC0 stock video (short clip, safe for reuse)
-url = "https://cdn.pixabay.com/video/2019/05/06/22715-338231996_tiny.mp4"
+# Example free CC0 stock video (Pixabay, finance-themed)
+url = "https://cdn.pixabay.com/video/2018/07/05/16969-274611938_large.mp4"
 
 resp = requests.get(url)
 with open("stock.mp4", "wb") as f:
