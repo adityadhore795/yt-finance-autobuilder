@@ -25,7 +25,13 @@ jobs:
 
       - name: Get music from FreePD
         run: python get_music.py
+        
+      - name: Generate voice from script
+        run: python make_voice.py
 
+      - name: Download stock video
+        run: python get_stock.py
+        
       - name: Make video with FFmpeg
         run: python make_video.py
 
